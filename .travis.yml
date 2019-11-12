@@ -1,9 +1,13 @@
 sudo: required
 services:
   - docker
-
 before_install:
   - docker build -t nvtuong/frontend -f Dockerfile.dev .
-
 script:
   - docker run -e CI=true nvtuong/frontend yarn test --coverage
+deploy:
+  provider: heroku
+  api_key:
+    secure: IFW6AI4od3/i/T9QwO098XCm42qDpivmdIQ0ymDxqLn8RyKncmSYLoPFkDmXX35k6szAWCHXOLqPB+3QaUfE5e4l1xLy51MY5AYuAKq385x3J5iGO9LrYwszbJQkFuVOLyXJNq5A9GIbSKJ7a8a9yH+nrkbpmi/6owps8ud2CVrbQscJJm906RHOkLK6wSh70TcJGNwoDOflO9Zaz4WkM/f2YrBjJF4IBxg66taCJX+B30RsKiPCvS33ujJmXFSGbiqdssVuXheY35l11NsPRQyJ9HZlwUHZihCXksTAdz4EYVNiD0m0KG/7rNN+pKwXR4I3woHPBlR/Ff23slkd9+nWmKaZB3DXw9xlkkcqo1kNHcr11LyzqFZaq2uYWaVVTukcZ34ok9mUwOJwLI0xp6o+QNktpjxpEz4FWL5y7VCU+JywLn7t3JIfeY6xmgzHYvmhSPOX8HJWNg1yH0ZyndOLv+3pnMNLSTgD4KdUGqACPPDLJDUAkctT08HrbjJJIn+QVvaoAQE6rQQaByn4o7bDhjiof3nVwQEw0d46eWJnJfDIQhx1og0llYsShr0tYQBqYiUo/lH2zmAR1tT1oXuI70iegfG7r0hBBt0jIUtP2fPC4S8LGqE+seung5G5PXVh4XPBmeA40Q/KSAt/lkUN1dyRHtm3J53VxjiyrsQ=
+  on:
+    branch: master
